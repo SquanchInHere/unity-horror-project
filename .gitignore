@@ -1,0 +1,89 @@
+# Unity generated folders anywhere in repository
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/[Ll]ogs/
+**/[Mm]emoryCaptures/
+**/[Rr]ecordings/
+**/[Uu]ser[Ss]ettings/
+
+# IDE
+**/.vs/
+**/.vscode/
+**/.idea/
+**/.consulo/
+
+# Auto-generated project files
+**/*.csproj
+**/*.unityproj
+**/*.sln
+**/*.suo
+**/*.tmp
+**/*.user
+**/*.userprefs
+**/*.pidb
+**/*.booproj
+**/*.svd
+**/*.pdb
+**/*.mdb
+**/*.opendb
+**/*.VC.db
+**/*.DotSettings.user
+
+# OS junk
+**/.DS_Store
+**/Thumbs.db
+**/Desktop.ini
+
+# Diagnostics
+**/sysinfo.txt
+**/*.stacktrace
+
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Unity cache
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.tmp
+*.bak
+*.swp
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Crash reports
+sysinfo.txt
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+*.app
+*.exe
+*.x86_64
+*.x86
+
+Basketball/Assets/MarpaStudio/HDRP/ArenaHDRP.unitypackage
+Basketball/Assets/MarpaStudio/URP/ArenaURP.unitypackage
