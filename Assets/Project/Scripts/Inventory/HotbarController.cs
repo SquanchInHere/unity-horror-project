@@ -55,6 +55,10 @@ public class HotbarController : MonoBehaviour
     {
         if (heldItemRoot == null)
         {
+            Debug.LogError(
+                "HotbarController: No Held Item Root assigned.",
+                this
+            );
             enabled = false;
             return;
         }
@@ -144,7 +148,9 @@ public class HotbarController : MonoBehaviour
         return ids;
     }
 
-    public void RestoreAssignments(IReadOnlyList<string> itemIds, ItemDatabase itemDatabase)
+    public void RestoreAssignments(
+        IReadOnlyList<string> itemIds,
+        ItemDatabase itemDatabase)
     {
         for (int i = 0; i < assignments.Length; i++)
         {
@@ -295,7 +301,8 @@ public class HotbarController : MonoBehaviour
     {
         heldObject.SetActive(false);
 
-        foreach (ParticleSystem particles in heldObject.GetComponentsInChildren<ParticleSystem>(true))
+        foreach (ParticleSystem particles in
+                 heldObject.GetComponentsInChildren<ParticleSystem>(true))
         {
             particles.Stop(
                 true,
@@ -303,7 +310,8 @@ public class HotbarController : MonoBehaviour
             );
         }
 
-        foreach (AudioSource audioSource in heldObject.GetComponentsInChildren<AudioSource>(true))
+        foreach (AudioSource audioSource in
+                 heldObject.GetComponentsInChildren<AudioSource>(true))
         {
             audioSource.Stop();
         }

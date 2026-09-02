@@ -45,7 +45,7 @@ public class MineFirstPersonController : MonoBehaviour
 
         if (cameraPivot == null)
         {
-            Debug.LogError("Camera Pivot is not exists.", this);
+            Debug.LogError("В MineFirstPersonController не назначен Camera Pivot.", this);
             enabled = false;
             return;
         }

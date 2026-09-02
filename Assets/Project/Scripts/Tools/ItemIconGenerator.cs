@@ -26,7 +26,7 @@ public static class ItemIconGenerator
         {
             EditorUtility.DisplayDialog(
                 "Item Icon Generator",
-                "Выдели один или несколько ItemDefinition в окне Project.",
+                "Select one or more ItemDefinitions in the window Project.",
                 "OK"
             );
             return;
@@ -47,7 +47,6 @@ public static class ItemIconGenerator
                 EditorApplication.update -= ProcessQueue;
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
-                Debug.Log("Иконки предметов созданы.");
                 return;
             }
 
@@ -62,7 +61,7 @@ public static class ItemIconGenerator
         if (sourcePrefab == null)
         {
             Debug.LogError(
-                $"{currentItem.name}: не назначен World Prefab или Held Prefab.",
+                $"{currentItem.name}: no World Prefab or Held Prefab assigned.",
                 currentItem
             );
             currentItem = null;
@@ -76,7 +75,7 @@ public static class ItemIconGenerator
             if (EditorApplication.timeSinceStartup - startedAt > 10.0)
             {
                 Debug.LogError(
-                    $"{currentItem.name}: Unity не смогла создать preview модели.",
+                    $"{currentItem.name}: Unity was unable to create a preview of the model.",
                     currentItem
                 );
                 currentItem = null;
@@ -149,6 +148,6 @@ public static class ItemIconGenerator
         serializedItem.ApplyModifiedProperties();
         EditorUtility.SetDirty(item);
 
-        Debug.Log($"Создана иконка: {iconPath}", item);
+        Debug.Log($"Icon created: {iconPath}", item);
     }
 }

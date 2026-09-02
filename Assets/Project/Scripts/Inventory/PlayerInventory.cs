@@ -30,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
         if (startingItems.Count == 0)
         {
             Debug.LogWarning(
-                "PlayerInventory: Starting Items пуст. Инвентарь начнёт игру без предметов.",
+                "PlayerInventory: Starting Items is empty. Your inventory will start the game with no items.",
                 this
             );
         }
@@ -194,7 +194,7 @@ public class PlayerInventory : MonoBehaviour
                 if (item == null)
                 {
                     Debug.LogWarning(
-                        $"PlayerInventory: Item Id '{savedSlot.itemId}' отсутствует в ItemDatabase.",
+                        $"PlayerInventory: Item Id '{savedSlot.itemId}' is missing from ItemDatabase.",
                         this
                     );
                     continue;

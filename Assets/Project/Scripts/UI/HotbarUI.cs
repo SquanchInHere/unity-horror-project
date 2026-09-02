@@ -18,7 +18,7 @@ public class HotbarUI : MonoBehaviour
         if (inventory == null || hotbar == null)
         {
             Debug.LogError(
-                "HotbarUI: не назначены Inventory или Hotbar.",
+                "HotbarUI: No Inventory or Hotbar assigned.",
                 this
             );
             enabled = false;
@@ -53,7 +53,7 @@ public class HotbarUI : MonoBehaviour
         if (slotsContainer == null || slotPrefab == null)
         {
             Debug.LogError(
-                "HotbarUI: не назначены Slots Container или Slot Prefab.",
+                "HotbarUI: No Slots Container or Slot Prefab assigned.",
                 this
             );
 

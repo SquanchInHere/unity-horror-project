@@ -66,7 +66,7 @@ public class InventoryUI : MonoBehaviour
         if (slotsContainer == null || slotPrefab == null)
         {
             Debug.LogError(
-                "InventoryUI: не назначены Slots Container или Slot Prefab.",
+                "InventoryUI: Slots Container or Slot Prefab are not assigned.",
                 this
             );
 
@@ -97,7 +97,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (inventoryPanel == null)
         {
-            Debug.LogError("InventoryUI: не назначен Inventory Panel.", this);
+            Debug.LogError("InventoryUI: No Inventory Panel assigned.", this);
             return;
         }
 
@@ -106,7 +106,7 @@ public class InventoryUI : MonoBehaviour
         if (rootCanvas == null)
         {
             Debug.LogError(
-                "InventoryUI: над Inventory Panel не найден Canvas.",
+                "InventoryUI: Canvas not found above Inventory Panel.",
                 inventoryPanel
             );
             return;

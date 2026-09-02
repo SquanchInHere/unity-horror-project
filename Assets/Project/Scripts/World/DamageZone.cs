@@ -1,16 +1,30 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class DamageZone : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float damage = 25.0f;
+    [SerializeField] private bool damageOnlyOnce = true;
+
+    private bool wasTriggered;
+
+    private void Reset()
     {
-        
+        Collider zoneCollider = GetComponent<Collider>();
+        zoneCollider.isTrigger = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (damageOnlyOnce && wasTriggered)
+            return;
+
+        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
+
+        if (health == null)
+            return;
+
+        wasTriggered = true;
+        health.TakeDamage(damage);
     }
 }

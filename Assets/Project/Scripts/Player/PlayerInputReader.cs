@@ -13,6 +13,9 @@ public class PlayerInputReader : MonoBehaviour
 
     private PlayerInput playerInput;
     private InputAction crouchAction;
+    private InputAction hotbar1Action;
+    private InputAction hotbar2Action;
+    private InputAction hotbar3Action;
     private InputAction sprintAction;
 
     private bool jumpPressed;
@@ -24,6 +27,9 @@ public class PlayerInputReader : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         crouchAction = playerInput.actions.FindAction("Crouch", false);
+        hotbar1Action = playerInput.actions.FindAction("Hotbar1", false);
+        hotbar2Action = playerInput.actions.FindAction("Hotbar2", false);
+        hotbar3Action = playerInput.actions.FindAction("Hotbar3", false);
         sprintAction = playerInput.actions.FindAction("Sprint", false);
     }
 
@@ -31,6 +37,33 @@ public class PlayerInputReader : MonoBehaviour
     {
         CrouchHeld = GameplayEnabled && crouchAction != null && crouchAction.IsPressed();
         SprintHeld = GameplayEnabled && sprintAction != null && sprintAction.IsPressed();
+
+        if (!GameplayEnabled)
+            return;
+
+        Keyboard keyboard = Keyboard.current;
+
+        if ((hotbar1Action != null && hotbar1Action.WasPressedThisFrame()) ||
+            (keyboard != null &&
+             (keyboard.digit1Key.wasPressedThisFrame ||
+              keyboard.numpad1Key.wasPressedThisFrame)))
+        {
+            requestedHotbarIndex = 0;
+        }
+        else if ((hotbar2Action != null && hotbar2Action.WasPressedThisFrame()) ||
+                 (keyboard != null &&
+                  (keyboard.digit2Key.wasPressedThisFrame ||
+                   keyboard.numpad2Key.wasPressedThisFrame)))
+        {
+            requestedHotbarIndex = 1;
+        }
+        else if ((hotbar3Action != null && hotbar3Action.WasPressedThisFrame()) ||
+                 (keyboard != null &&
+                  (keyboard.digit3Key.wasPressedThisFrame ||
+                   keyboard.numpad3Key.wasPressedThisFrame)))
+        {
+            requestedHotbarIndex = 2;
+        }
     }
 
     public void OnMove(InputValue value)
