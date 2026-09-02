@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4762248410294587796
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 643714392618994109, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5261796662140747753, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041188153384351234, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.65306
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.437731
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.35355392
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6123723
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.49999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 3.841
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -104.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 104.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082458585371789303, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_Name
+      value: WorldTorch
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082458585371789303, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7250437591341685965, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9082458585371789303, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7490721230947218928}
+  m_SourcePrefab: {fileID: 100100000, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+--- !u!1 &4331821023085155939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9082458585371789303, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+  m_PrefabInstance: {fileID: 4762248410294587796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7490721230947218928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331821023085155939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee95e87cb338b446ac0d9ae0c1a8b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryPickup
+  defaultPrompt: Interact
+  item: {fileID: 11400000, guid: 3ca2cd87bf1bc2742a47422e758d8d0a, type: 2}
+  amount: 1
