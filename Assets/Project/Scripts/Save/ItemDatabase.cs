@@ -33,7 +33,7 @@ public class ItemDatabase : ScriptableObject
             if (byId.ContainsKey(item.ItemId))
             {
                 Debug.LogError(
-                    $"ItemDatabase: повторяется Item Id '{item.ItemId}'.",
+                    $"ItemDatabase: duplicate Item Id '{item.ItemId}'.",
                     item
                 );
                 continue;

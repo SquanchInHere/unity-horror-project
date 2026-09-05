@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(PlayerInputReader))]
+[RequireComponent(typeof(PlayerSurvival))]
 public class HotbarController : MonoBehaviour
 {
     [Header("Held item")]
@@ -17,6 +18,7 @@ public class HotbarController : MonoBehaviour
 
     private PlayerInventory inventory;
     private PlayerInputReader input;
+    private PlayerSurvival survival;
 
     private readonly ItemDefinition[] assignments =
         new ItemDefinition[PlayerInventory.HotbarSlotCount];
@@ -36,6 +38,7 @@ public class HotbarController : MonoBehaviour
     {
         inventory = GetComponent<PlayerInventory>();
         input = GetComponent<PlayerInputReader>();
+        survival = GetComponent<PlayerSurvival>();
         SelectedIndex = Mathf.Clamp(
             startingSlot,
             0,
@@ -80,7 +83,10 @@ public class HotbarController : MonoBehaviour
         int requestedIndex = input.ConsumeHotbarIndex();
 
         if (requestedIndex >= 0)
+        {
             SelectSlot(requestedIndex);
+            TryConsumeSelectedItem();
+        }
     }
 
     public ItemDefinition GetAssignedItem(int hotbarIndex)
@@ -136,6 +142,25 @@ public class HotbarController : MonoBehaviour
         SelectedIndex = index;
         ApplySelection();
         SelectionChanged?.Invoke(SelectedIndex);
+    }
+
+    public bool TryConsumeSelectedItem()
+    {
+        ItemDefinition selectedItem = GetAssignedItem(SelectedIndex);
+        ConsumableItemDefinition consumable =
+            selectedItem as ConsumableItemDefinition;
+
+        if (consumable == null ||
+            survival == null ||
+            !inventory.HasItem(selectedItem))
+        {
+            return false;
+        }
+
+        if (!survival.TryConsume(consumable))
+            return false;
+
+        return inventory.RemoveItem(selectedItem, 1);
     }
 
     public List<string> GetAssignmentItemIds()
@@ -317,5 +342,22 @@ public class HotbarController : MonoBehaviour
         }
 
         Destroy(heldObject);
+    }
+
+    public GameObject GetSelectedHeldObject()
+    {
+        if (SelectedIndex < 0 || SelectedIndex >= spawnedObjects.Length)
+            return null;
+
+        return spawnedObjects[SelectedIndex];
+    }
+
+    public T GetSelectedHeldComponent<T>() where T : Component
+    {
+        GameObject selectedObject = GetSelectedHeldObject();
+
+        return selectedObject != null
+            ? selectedObject.GetComponentInChildren<T>(true)
+            : null;
     }
 }

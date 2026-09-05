@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInputReader))]
+[RequireComponent(typeof(PlayerSurvival))]
 public class MineFirstPersonController : MonoBehaviour
 {
     [Header("References")]
@@ -24,9 +25,11 @@ public class MineFirstPersonController : MonoBehaviour
     [SerializeField] private LayerMask ceilingMask;
 
     public bool IsCrouching { get; private set; }
+    public bool IsSprinting { get; private set; }
 
     private CharacterController controller;
     private PlayerInputReader input;
+    private PlayerSurvival survival;
 
     private float standingHeight;
     private Vector3 standingCenter;
@@ -42,10 +45,14 @@ public class MineFirstPersonController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         input = GetComponent<PlayerInputReader>();
+        survival = GetComponent<PlayerSurvival>();
 
         if (cameraPivot == null)
         {
-            Debug.LogError("В MineFirstPersonController не назначен Camera Pivot.", this);
+            Debug.LogError(
+                "MineFirstPersonController: Camera Pivot is not assigned.",
+                this
+            );
             enabled = false;
             return;
         }
@@ -75,7 +82,11 @@ public class MineFirstPersonController : MonoBehaviour
     private void Update()
     {
         if (!input.GameplayEnabled)
+        {
+            IsSprinting = false;
+            survival.SetSprinting(false);
             return;
+        }
 
         UpdateCrouch();
         UpdateMovement();
@@ -158,14 +169,24 @@ public class MineFirstPersonController : MonoBehaviour
         if (horizontalDirection.sqrMagnitude > 1.0f)
             horizontalDirection.Normalize();
 
+        bool hasMovementInput = horizontalDirection.sqrMagnitude > 0.01f;
+        IsSprinting = !IsCrouching &&
+                      hasMovementInput &&
+                      input.SprintHeld &&
+                      survival.CanSprint;
+
+        survival.SetSprinting(IsSprinting);
+
         float currentSpeed;
 
         if (IsCrouching)
             currentSpeed = crouchSpeed;
-        else if (input.SprintHeld)
+        else if (IsSprinting)
             currentSpeed = sprintSpeed;
         else
             currentSpeed = walkSpeed;
+
+        currentSpeed *= survival.MovementSpeedMultiplier;
 
         if (input.ConsumeJump() && controller.isGrounded && !IsCrouching)
         {

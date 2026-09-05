@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036288cb47390314a87505cc9cae5876, type: 3}
+  m_Name: Consumable_Mushroom
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableItemDefinition
+  itemId: mushroom
+  displayName: Mushroom
+  category: 2
+  icon: {fileID: 21300000, guid: 50083a1354315bf45bf4d95e0676514b, type: 3}
+  maxStack: 5
+  worldPrefab: {fileID: 107932, guid: 96ab9cab0b2d5e849b943529973eb959, type: 3}
+  heldPrefab: {fileID: 157872, guid: 37f5e979db7c10f4380e681e18359d40, type: 3}
+  hungerRestored: 5
+  staminaRestored: 5
+  healthRestored: 6
+  appliesPoison: 0
+  curesPoison: 1

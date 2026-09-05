@@ -19,6 +19,7 @@ public class InventorySlotUI : MonoBehaviour,
     [SerializeField] private Sprite missingIcon;
 
     private bool hasItem;
+    private bool allowRightButtonDrag;
 
     public int SlotIndex { get; private set; } = -1;
     public Sprite CurrentIcon => icon != null ? icon.sprite : null;
@@ -103,10 +104,14 @@ public class InventorySlotUI : MonoBehaviour,
             selection.SetActive(isSelected);
     }
 
+    public void SetRightButtonDragEnabled(bool enabled)
+    {
+        allowRightButtonDrag = enabled;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!hasItem ||
-            eventData.button != PointerEventData.InputButton.Left)
+        if (!hasItem || !IsSupportedDragButton(eventData.button))
         {
             return;
         }
@@ -116,8 +121,7 @@ public class InventorySlotUI : MonoBehaviour,
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!hasItem ||
-            eventData.button != PointerEventData.InputButton.Left)
+        if (!hasItem || !IsSupportedDragButton(eventData.button))
         {
             return;
         }
@@ -127,13 +131,21 @@ public class InventorySlotUI : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (IsSupportedDragButton(eventData.button))
             DragFinished?.Invoke();
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (IsSupportedDragButton(eventData.button))
             DropReceived?.Invoke(SlotIndex);
+    }
+
+    private bool IsSupportedDragButton(
+        PointerEventData.InputButton inputButton)
+    {
+        return inputButton == PointerEventData.InputButton.Left ||
+               (allowRightButtonDrag &&
+                inputButton == PointerEventData.InputButton.Right);
     }
 }

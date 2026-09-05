@@ -11,7 +11,7 @@ public class InventoryPickup : InteractableBase
         if (item == null)
             return "Unknown object";
 
-        return $"Tacke: {item.DisplayName}";
+        return $"Take: {item.DisplayName}";
     }
 
     public override void Interact(PlayerInteractor interactor)

@@ -6,9 +6,9 @@ public class WorldTorch : InteractableBase
     [SerializeField] private bool startsLit;
     [SerializeField] private bool allowExtinguish;
 
-    [Header("Requirement")]
-    [SerializeField] private ItemDefinition requiredItem;
-    [SerializeField] private bool consumeRequiredItem;
+    [Header("Ignition")]
+    [Min(0.0f)]
+    [SerializeField] private float ignitionFuelCost = 5.0f;
 
     [Header("Optional audio")]
     [SerializeField] private AudioSource fireLoopSource;
@@ -23,24 +23,26 @@ public class WorldTorch : InteractableBase
 
     private void Awake()
     {
-        // Находит готовые Particle System огня и дыма внутри prefab.
         effectSystems = GetComponentsInChildren<ParticleSystem>(true);
-
-        // Это только обычные дочерние Light. Свет из Particle System Lights
-        // отдельно искать не нужно: он исчезает при остановке частиц.
         directLights = GetComponentsInChildren<Light>(true);
-
         SetLit(startsLit, false);
+    }
+
+    public override bool CanInteract(PlayerInteractor interactor)
+    {
+        if (IsLit)
+            return allowExtinguish;
+
+        HeldTorch heldTorch = interactor.Hotbar != null
+            ? interactor.Hotbar.GetSelectedHeldComponent<HeldTorch>()
+            : null;
+
+        return heldTorch != null && heldTorch.IsLit;
     }
 
     public override string GetPrompt(PlayerInteractor interactor)
     {
-        if (!IsLit)
-            return "Зажечь факел";
-
-        return allowExtinguish
-            ? "Потушить факел"
-            : "Факел горит";
+        return IsLit ? "Extinguish the torch" : "Light the torch";
     }
 
     public override void Interact(PlayerInteractor interactor)
@@ -53,21 +55,22 @@ public class WorldTorch : InteractableBase
             return;
         }
 
-        PlayerInventory inventory = interactor.Inventory;
+        HeldTorch heldTorch = interactor.Hotbar != null
+            ? interactor.Hotbar.GetSelectedHeldComponent<HeldTorch>()
+            : null;
 
-        if (requiredItem != null)
-        {
-            if (inventory == null || !inventory.HasItem(requiredItem, 1))
-            {
-                Debug.Log($"Нужен предмет: {requiredItem.DisplayName}", this);
-                return;
-            }
+        if (heldTorch == null || !heldTorch.IsLit)
+            return;
 
-            if (consumeRequiredItem)
-                inventory.RemoveItem(requiredItem, 1);
-        }
+        if (!heldTorch.TryConsumeFuel(ignitionFuelCost))
+            return;
 
         SetLit(true, true);
+    }
+
+    public void RestoreLitState(bool lit)
+    {
+        SetLit(lit, false);
     }
 
     private void SetLit(bool lit, bool playSound)
@@ -109,10 +112,5 @@ public class WorldTorch : InteractableBase
 
         if (clip != null)
             oneShotSource.PlayOneShot(clip);
-    }
-
-    public void RestoreLitState(bool lit)
-    {
-        SetLit(lit, false);
     }
 }

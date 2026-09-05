@@ -44,6 +44,21 @@ public class PlayerInventory : MonoBehaviour
         return slots[index];
     }
 
+    public bool TrySetSlot(
+        int index,
+        ItemDefinition item,
+        int amount)
+    {
+        InventorySlotData slot = GetSlot(index);
+
+        if (slot == null)
+            return false;
+
+        slot.Set(item, amount);
+        Changed?.Invoke();
+        return true;
+    }
+
     public bool HasItem(ItemDefinition item, int requiredAmount = 1)
     {
         if (item == null || requiredAmount <= 0)
@@ -165,6 +180,102 @@ public class PlayerInventory : MonoBehaviour
         second.Set(firstItem, firstAmount);
 
         Changed?.Invoke();
+    }
+
+    public bool TryTransferBetweenSlots(
+        int sourceIndex,
+        int targetIndex,
+        int amount,
+        bool allowSwap)
+    {
+        InventorySlotData source = GetSlot(sourceIndex);
+        InventorySlotData target = GetSlot(targetIndex);
+
+        if (source == null ||
+            target == null ||
+            sourceIndex == targetIndex ||
+            !TryCalculateTransfer(
+                source.Item,
+                source.Amount,
+                target.Item,
+                target.Amount,
+                amount,
+                allowSwap,
+                out ItemDefinition newSourceItem,
+                out int newSourceAmount,
+                out ItemDefinition newTargetItem,
+                out int newTargetAmount))
+        {
+            return false;
+        }
+
+        source.Set(newSourceItem, newSourceAmount);
+        target.Set(newTargetItem, newTargetAmount);
+        Changed?.Invoke();
+        return true;
+    }
+
+    private static bool TryCalculateTransfer(
+        ItemDefinition sourceItem,
+        int sourceAmount,
+        ItemDefinition targetItem,
+        int targetAmount,
+        int requestedAmount,
+        bool allowSwap,
+        out ItemDefinition newSourceItem,
+        out int newSourceAmount,
+        out ItemDefinition newTargetItem,
+        out int newTargetAmount)
+    {
+        newSourceItem = sourceItem;
+        newSourceAmount = sourceAmount;
+        newTargetItem = targetItem;
+        newTargetAmount = targetAmount;
+
+        if (sourceItem == null ||
+            sourceAmount <= 0 ||
+            requestedAmount <= 0)
+        {
+            return false;
+        }
+
+        int amountToMove = Mathf.Min(requestedAmount, sourceAmount);
+        bool targetIsEmpty = targetItem == null || targetAmount <= 0;
+
+        if (targetIsEmpty)
+        {
+            newSourceAmount = sourceAmount - amountToMove;
+            newSourceItem = newSourceAmount > 0 ? sourceItem : null;
+            newTargetItem = sourceItem;
+            newTargetAmount = amountToMove;
+            return true;
+        }
+
+        if (targetItem == sourceItem)
+        {
+            int freeSpace = Mathf.Max(
+                0,
+                sourceItem.MaxStack - targetAmount
+            );
+            int movedAmount = Mathf.Min(freeSpace, amountToMove);
+
+            if (movedAmount <= 0)
+                return false;
+
+            newSourceAmount = sourceAmount - movedAmount;
+            newSourceItem = newSourceAmount > 0 ? sourceItem : null;
+            newTargetAmount = targetAmount + movedAmount;
+            return true;
+        }
+
+        if (!allowSwap || amountToMove < sourceAmount)
+            return false;
+
+        newSourceItem = targetItem;
+        newSourceAmount = targetAmount;
+        newTargetItem = sourceItem;
+        newTargetAmount = sourceAmount;
+        return true;
     }
 
     public void RestoreFromSave(

@@ -17,48 +17,52 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8041188153384351234, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      propertyPath: m_Radius
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041188153384351234, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.65306
+      value: 5.6553164
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.196
+      value: 4.361
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.437731
+      value: 1.093
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.35355392
+      value: 0.4304609
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.6123723
+      value: 0.56098443
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.49999997
+      value: -0.27060014
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.49999985
+      value: -0.65328056
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 3.841
+      value: 7.435
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -104.511
+      value: -76.936
       objectReference: {fileID: 0}
     - target: {fileID: 8448910521934552397, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 104.511
+      value: -119.147
       objectReference: {fileID: 0}
     - target: {fileID: 9082458585371789303, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       propertyPath: m_Name
@@ -70,12 +74,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7250437591341685965, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+    - {fileID: 1811052263231111836, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9082458585371789303, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7490721230947218928}
+    - targetCorrespondingSourceObject: {fileID: 9082458585371789303, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6072426592708646878}
   m_SourcePrefab: {fileID: 100100000, guid: 3a793cff196732c47befdaf9681d69fb, type: 3}
 --- !u!1 &4331821023085155939 stripped
 GameObject:
@@ -97,3 +105,24 @@ MonoBehaviour:
   defaultPrompt: Interact
   item: {fileID: 11400000, guid: 3ca2cd87bf1bc2742a47422e758d8d0a, type: 2}
   amount: 1
+--- !u!114 &-6072426592708646878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331821023085155939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef68664c66ae6c46a51d6fc0290ffe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldTorch
+  defaultPrompt: Interact
+  startsLit: 1
+  allowExtinguish: 0
+  requiredItem: {fileID: 11400000, guid: 3ca2cd87bf1bc2742a47422e758d8d0a, type: 2}
+  consumeRequiredItem: 0
+  fireLoopSource: {fileID: 0}
+  oneShotSource: {fileID: 0}
+  igniteClip: {fileID: 0}
+  extinguishClip: {fileID: 0}

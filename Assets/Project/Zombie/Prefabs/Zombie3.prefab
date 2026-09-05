@@ -838,7 +838,6 @@ GameObject:
   - component: {fileID: 8429865231615740692}
   - component: {fileID: 3568628872616989892}
   - component: {fileID: 4694881305826050828}
-  - component: {fileID: 1046974320762247393}
   m_Layer: 10
   m_Name: Zombie3
   m_TagString: Untagged
@@ -907,30 +906,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
---- !u!114 &1046974320762247393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4803014352389650695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cc4669e43d13b14d8d3fd539e214ff4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterAI
-  eyes: {fileID: 8100673542385183510}
-  patrolPoints: []
-  visionDistance: 16
-  visionAngle: 95
-  visionMask:
-    serializedVersion: 2
-    m_Bits: 64
-  loseSightDelay: 2
-  searchDuration: 5
-  attackDistance: 1.6
-  attackDamage: 35
-  attackCooldown: 1.2
 --- !u!1 &4956532458698703312
 GameObject:
   m_ObjectHideFlags: 0

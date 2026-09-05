@@ -17,11 +17,13 @@ public class PlayerInteractor : MonoBehaviour
     private InteractableBase currentInteractable;
 
     public PlayerInventory Inventory { get; private set; }
+    public HotbarController Hotbar { get; private set; }
 
     private void Awake()
     {
         input = GetComponent<PlayerInputReader>();
         Inventory = GetComponent<PlayerInventory>();
+        Hotbar = GetComponent<HotbarController>();
 
         if (playerCamera == null)
             playerCamera = Camera.main;
@@ -43,13 +45,32 @@ public class PlayerInteractor : MonoBehaviour
 
         FindInteractable();
 
-        if (currentInteractable != null && input.ConsumeInteract())
-            currentInteractable.Interact(this);
+
+        if (currentInteractable == null ||
+            !currentInteractable.CanInteract(this) ||
+            !input.ConsumeInteract())
+            return;
+
+        currentInteractable.Interact(this);
+
+        FindInteractable();
     }
+
+    public void RefreshPrompt()
+    {
+        FindInteractable();
+    }
+
 
     private void FindInteractable()
     {
         currentInteractable = null;
+
+        if(playerCamera == null)
+        {
+            HidePrompt();
+            return;
+        }
 
         Ray ray = new Ray(
             playerCamera.transform.position,
@@ -66,22 +87,36 @@ public class PlayerInteractor : MonoBehaviour
             currentInteractable = hit.collider.GetComponentInParent<InteractableBase>();
         }
 
-        if (currentInteractable == null)
+        if (currentInteractable == null ||
+            !currentInteractable.CanInteract(this))
         {
+            currentInteractable = null;
+            HidePrompt();
+            return;
+        }
+
+        string prompt = currentInteractable.GetPrompt(this);
+
+        if (string.IsNullOrWhiteSpace(prompt))
+        {
+            currentInteractable = null;
             HidePrompt();
             return;
         }
 
         if (promptText != null)
         {
-            promptText.text = $"[E] {currentInteractable.GetPrompt(this)}";
+            promptText.text = $"[E] {prompt}";
             promptText.gameObject.SetActive(true);
         }
     }
 
     private void HidePrompt()
     {
-        if (promptText != null)
-            promptText.gameObject.SetActive(false);
+        if (promptText == null)
+            return;
+
+        promptText.text = string.Empty;
+        promptText.gameObject.SetActive(false);
     }
 }

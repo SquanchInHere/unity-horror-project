@@ -116,7 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ff98adc7552844ea01cbadfd65cf4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeldTorch
-  fuelSeconds: 300
+  maximumFuelSeconds: 180
+  fadeStartSeconds: 20
+  minimumLightMultiplier: 0.08
   fireLoopSource: {fileID: 0}
   oneShotSource: {fileID: 0}
   extinguishClip: {fileID: 0}
