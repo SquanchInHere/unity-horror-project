@@ -1,0 +1,101 @@
+=============================================================================
+AAA REALISTIC ASSET: XXXXX
+Multi-Pipeline Ready (Built-in, URP, HDRP)
+Documentation & Setup Guide
+=============================================================================
+
+THANK YOU!
+Thank you for purchasing this high-quality asset from Meshive Labs. 
+This package is meticulously optimized for all Unity Render Pipelines 
+(Built-in, URP, and HDRP). It features 4K PBR textures, optimized LOD groups, 
+and a modular pipeline installation system to keep your project clean and 
+free of "Pink Material" errors.
+
+-----------------------------------------------------------------------------
+1. TECHNICAL SPECIFICATIONS
+-----------------------------------------------------------------------------
+- Supported Pipelines: Built-in (Standard), URP, HDRP
+- Texture Resolution: 4096 x 4096 (4K)
+- Compression: High Quality (BC7) for maximum performance and visual fidelity
+- Normal Map Format: OpenGL (Y+)
+- Workflow: PBR (Metallic/Roughness packed for Unity)
+- LODs Included: LOD0 (Hero), LOD1, LOD2, LOD3 + Culled
+
+-----------------------------------------------------------------------------
+2. RENDER PIPELINE SETUP (CRITICAL)
+-----------------------------------------------------------------------------
+To ensure maximum compatibility, the core files of this asset are imported 
+using the Built-in (Standard) render pipeline. 
+
+Depending on your project's Render Pipeline, please follow the steps below 
+to get the correct Prefabs and Materials:
+
+[ IF YOU USE BUILT-IN (STANDARD 3D) ]
+1. You don't need to do anything! 
+2. Simply navigate to the "Prefabs_Standard" folder and drag the XXXXX 
+   prefab into your scene.
+
+[ IF YOU USE URP (UNIVERSAL RENDER PIPELINE) ]
+1. Navigate to the "Pipelines" folder inside the asset directory.
+2. Double-click on the "URP_Support.unitypackage" file and import it.
+3. This will instantly unpack the URP-configured materials and prefabs.
+4. Go to the newly created "Prefabs_URP" folder and drag the prefab into your scene.
+
+[ IF YOU USE HDRP (HIGH DEFINITION RENDER PIPELINE) ]
+1. Navigate to the "Pipelines" folder inside the asset directory.
+2. Double-click on the "HDRP_Support.unitypackage" file and import it.
+3. Go to the newly created "Prefabs_HDRP" folder and drag the prefab into your scene.
+*Note: By default, the HDRP material is set to "Standard" mode for a safe, error-free import. To enable ultra-realistic Subsurface Scattering, see Section 3.*
+
+-----------------------------------------------------------------------------
+3. HOW TO ENABLE SUBSURFACE SCATTERING (HDRP ONLY)
+-----------------------------------------------------------------------------
+This asset includes a custom "Thickness Map" in the Textures folder, allowing 
+for realistic Subsurface Scattering (light transmission through the food). 
+
+Since Unity HDRP requires a Diffusion Profile specific to your project's settings, 
+you need to set this up manually to achieve the cinematic "glow" effect:
+
+STEP A: Create a Diffusion Profile
+   1. In your Project window, right-click > Create > Rendering > HDRP Diffusion Profile.
+   2. Name it (e.g., "Profile_Food").
+   3. Select the profile and adjust the "Scattering Distance" color to a warm/fleshy tone.
+   4. IMPORTANT: Go to "Edit > Project Settings > Graphics > HDRP Global Settings".
+   5. Add your new "Profile_Food" to the "Diffusion Profile List".
+   *(Tip: Also add it to the profile list of your active Quality Settings asset).*
+
+STEP B: Configure the Material
+   1. Select the material ("M_XXXXX_HDRP") in the Materials_HDRP folder.
+   2. In the Inspector, change "Material Type" from "Standard" to "Subsurface Scattering".
+   3. Assign your new "Profile_Food" to the "Diffusion Profile" slot.
+   4. Assign the provided "Thickness Map" (located in the Textures folder) to the "Thickness Map" slot.
+
+-----------------------------------------------------------------------------
+4. TEXTURE MAPPING INFO (MASK MAP)
+-----------------------------------------------------------------------------
+This asset uses Unity's standard Mask Map packing system for memory optimization.
+If you need to edit the shader or use these textures in other software (like Unreal Engine or Blender):
+
+- Mask Map (RGBA):
+  * Red Channel   : Metallic
+  * Green Channel : Ambient Occlusion
+  * Blue Channel  : Detail Map / Empty
+  * Alpha Channel : Smoothness
+
+- Normal Map:
+  * This asset uses the OpenGL format. If shadows/bumps look inverted in your 
+    specific custom shaders, simply check the "Flip Green Channel" box in the 
+    texture's import settings.
+
+-----------------------------------------------------------------------------
+SUPPORT & CONTACT
+-----------------------------------------------------------------------------
+If you encounter any issues, need source files, or have feature requests, 
+please do not hesitate to reach out!
+
+Email: support@meshivelabs.com
+ArtStation: https://www.artstation.com/meshivelabs
+Website: www.meshivelabs.com
+
+Happy Developing!
+- The Meshive Labs Team

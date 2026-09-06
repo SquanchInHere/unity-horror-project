@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9c99245b3fdbc764690d40c199e4b86e
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 370160
+  packageName: Artisan Rye Bread
+  packageVersion: 1.0
+  assetPath: Assets/SM_ryebread_Built-in/Pipelines/HDRP_support.unitypackage
+  uploadId: 909276

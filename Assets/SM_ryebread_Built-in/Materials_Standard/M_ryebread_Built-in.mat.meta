@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: be176d2c580b425469fc726175649851
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 370160
+  packageName: Artisan Rye Bread
+  packageVersion: 1.0
+  assetPath: Assets/SM_ryebread_Built-in/Materials_Standard/M_ryebread_Built-in.mat
+  uploadId: 909276

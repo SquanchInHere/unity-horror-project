@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b3e92f239f1812740950f7cb13fe16e3
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 370160
+  packageName: Artisan Rye Bread
+  packageVersion: 1.0
+  assetPath: Assets/SM_ryebread_Built-in/Pipelines/URP_support.unitypackage
+  uploadId: 909276
