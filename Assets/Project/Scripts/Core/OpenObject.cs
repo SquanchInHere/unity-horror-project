@@ -10,12 +10,12 @@ public class OpenObject : InteractableBase
     [Header("Motion")]
     [SerializeField] private MotionType motionType = MotionType.Rotate;
     [SerializeField] private MotionAxis motionAxis = MotionAxis.Y;
-
-    [SerializeField] private float openingDegree = 90f;
-
+    [SerializeField] private float openingDegree = 90.0f;
+    [Min(0.01f)]
     [SerializeField] private float animationDuration = 0.8f;
-
-    [SerializeField] private AnimationCurve animationCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+    [SerializeField]
+    private AnimationCurve animationCurve =
+        AnimationCurve.EaseInOut(0.0f, 0.0f, 1.0f, 1.0f);
 
     [Header("Behavior")]
     [SerializeField] private bool canClose = true;
@@ -32,17 +32,17 @@ public class OpenObject : InteractableBase
 
     private Vector3 closedLocalPosition;
     private Vector3 openedLocalPosition;
-
     private Quaternion closedLocalRotation;
     private Quaternion openedLocalRotation;
 
     private Coroutine animationCoroutine;
-
     private bool isOpen;
     private bool isAnimating;
 
     public bool IsOpen => isOpen;
     public bool IsAnimating => isAnimating;
+    public bool CanOpen => canOpen;
+    public bool CanClose => canClose;
 
     public event Action Opened;
     public event Action Closed;
@@ -51,48 +51,15 @@ public class OpenObject : InteractableBase
     {
         if (movingPart == null)
         {
+            Debug.LogError(
+                "OpenObject: Moving Part is not assigned.",
+                this
+            );
             enabled = false;
             return;
         }
 
-        RememberPositions();
-    }
-
-    private void RememberPositions()
-    {
-        Vector3 axis = GetAxis();
-
-        closedLocalPosition = movingPart.localPosition;
-        closedLocalRotation = movingPart.localRotation;
-
-        openedLocalPosition =
-            closedLocalPosition + axis * openingDegree;
-
-        openedLocalRotation =
-            closedLocalRotation *
-            Quaternion.AngleAxis(openingDegree, axis);
-    }
-
-    private Vector3 GetAxis()
-    {
-        return motionAxis switch
-        {
-            MotionAxis.X => Vector3.right,
-            MotionAxis.Y => Vector3.up,
-            MotionAxis.Z => Vector3.forward,
-            _ => Vector3.up
-        };
-    }
-
-    public override string GetPrompt(PlayerInteractor interactor)
-    {
-        if (isAnimating)
-            return "Wait";
-
-        if (!isOpen)
-            return openPrompt;
-
-        return canClose ? closePrompt : "";
+        RememberStates();
     }
 
     public override bool CanInteract(PlayerInteractor interactor)
@@ -100,6 +67,17 @@ public class OpenObject : InteractableBase
         return base.CanInteract(interactor) &&
                !isAnimating &&
                (isOpen ? canClose : canOpen);
+    }
+
+    public override string GetPrompt(PlayerInteractor interactor)
+    {
+        if (isAnimating)
+            return "Wait";
+
+        if (!CanInteract(interactor))
+            return string.Empty;
+
+        return isOpen ? closePrompt : openPrompt;
     }
 
     public override void Interact(PlayerInteractor interactor)
@@ -117,6 +95,47 @@ public class OpenObject : InteractableBase
         return TrySetOpen(false);
     }
 
+    public void RestoreState(bool open)
+    {
+        if (movingPart == null)
+            return;
+
+        if (animationCoroutine != null)
+        {
+            StopCoroutine(animationCoroutine);
+            animationCoroutine = null;
+        }
+
+        isAnimating = false;
+        isOpen = open;
+        ApplyStateImmediately(open);
+    }
+
+    private void RememberStates()
+    {
+        Vector3 axis = GetAxis();
+
+        closedLocalPosition = movingPart.localPosition;
+        closedLocalRotation = movingPart.localRotation;
+
+        openedLocalPosition =
+            closedLocalPosition + axis * openingDegree;
+
+        openedLocalRotation =
+            closedLocalRotation * Quaternion.AngleAxis(openingDegree, axis);
+    }
+
+    private Vector3 GetAxis()
+    {
+        return motionAxis switch
+        {
+            MotionAxis.X => Vector3.right,
+            MotionAxis.Y => Vector3.up,
+            MotionAxis.Z => Vector3.forward,
+            _ => Vector3.up
+        };
+    }
+
     private bool TrySetOpen(bool shouldOpen)
     {
         if (isAnimating || shouldOpen == isOpen)
@@ -128,13 +147,7 @@ public class OpenObject : InteractableBase
         if (!shouldOpen && !canClose)
             return false;
 
-        if (animationCoroutine != null)
-            StopCoroutine(animationCoroutine);
-
-        animationCoroutine = StartCoroutine(
-            AnimateObject(shouldOpen)
-        );
-
+        animationCoroutine = StartCoroutine(AnimateObject(shouldOpen));
         return true;
     }
 
@@ -155,18 +168,14 @@ public class OpenObject : InteractableBase
 
         PlaySound(shouldOpen ? openSound : closeSound);
 
-        float elapsedTime = 0f;
+        float elapsedTime = 0.0f;
 
         while (elapsedTime < animationDuration)
         {
             elapsedTime += Time.deltaTime;
 
-            float progress = Mathf.Clamp01(
-                elapsedTime / animationDuration
-            );
-
-            float curvedProgress =
-                animationCurve.Evaluate(progress);
+            float progress = Mathf.Clamp01(elapsedTime / animationDuration);
+            float curvedProgress = animationCurve.Evaluate(progress);
 
             if (motionType == MotionType.Rotate)
             {
@@ -188,10 +197,7 @@ public class OpenObject : InteractableBase
             yield return null;
         }
 
-        if (motionType == MotionType.Rotate)
-            movingPart.localRotation = targetRotation;
-        else
-            movingPart.localPosition = targetPosition;
+        ApplyStateImmediately(shouldOpen);
 
         isOpen = shouldOpen;
         isAnimating = false;
@@ -201,6 +207,22 @@ public class OpenObject : InteractableBase
             Opened?.Invoke();
         else
             Closed?.Invoke();
+    }
+
+    private void ApplyStateImmediately(bool open)
+    {
+        if (motionType == MotionType.Rotate)
+        {
+            movingPart.localRotation = open
+                ? openedLocalRotation
+                : closedLocalRotation;
+        }
+        else
+        {
+            movingPart.localPosition = open
+                ? openedLocalPosition
+                : closedLocalPosition;
+        }
     }
 
     private void PlaySound(AudioClip clip)

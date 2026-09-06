@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4994934850018778}
   - component: {fileID: 33173099601314454}
   - component: {fileID: 23643248259093426}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4105734142940820}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OreBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 33196395783446822}
   - component: {fileID: 23339881629596520}
   - component: {fileID: 64493330655899446}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OreStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 3499835195807791636}
   - component: {fileID: 7185626920400642330}
   - component: {fileID: 5842365211916228824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

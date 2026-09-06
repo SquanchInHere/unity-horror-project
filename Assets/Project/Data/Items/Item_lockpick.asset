@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48244901d483d6d44a0c39aa6d23b173, type: 3}
-  m_Name: Item_key
+  m_Name: Item_lockpick
   m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
-  itemId: last_door_key
-  displayName: Rescue Key
+  itemId: lockpick
+  displayName: Lockpick
   category: 4
-  icon: {fileID: 21300000, guid: d103e4b6724ea6b42836fd40ece3564a, type: 3}
-  maxStack: 1
+  icon: {fileID: 0}
+  maxStack: 3
   worldPrefab: {fileID: 374289202576707483, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
   heldPrefab: {fileID: 0}

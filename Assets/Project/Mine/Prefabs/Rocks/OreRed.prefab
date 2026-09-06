@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4542299208382236}
   - component: {fileID: 33044541141182068}
   - component: {fileID: 23395439447769004}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 33735978177065528}
   - component: {fileID: 23616422505817122}
   - component: {fileID: 64324016407306108}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OreStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4344557194693220}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OreRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7504622233473170124}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 21701533595315371}
   - component: {fileID: 2692673660972832082}
   - component: {fileID: 5384315175709860119}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Area Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

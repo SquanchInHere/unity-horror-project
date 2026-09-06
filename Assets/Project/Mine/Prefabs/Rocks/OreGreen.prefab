@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33224252734226482}
   - component: {fileID: 23693121571249300}
   - component: {fileID: 64848170705104468}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OreStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4632921295878818}
   - component: {fileID: 33024740580443852}
   - component: {fileID: 23044222693562550}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4414344445486422}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OreGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6729598, y: 0.67296, z: 0.67295986}
+  m_LocalScale: {x: 0.3679577, y: 0.36795768, z: 0.36795774}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4632921295878818}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 4549911930428856273}
   - component: {fileID: 5483622996512952980}
   - component: {fileID: 5632026373707285678}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Area Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
